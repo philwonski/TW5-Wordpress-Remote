@@ -1,0 +1,27 @@
+created: 20210408002143083
+modified: 20210420161745547
+tags: 
+title: loginform1
+type: text/vnd.tiddlywiki
+
+\define loginform()
+<$login-widget url='$(url)$' cookieName='token' localstorageKey='ws-token'/>
+\end
+
+\define url()
+https://{{current_url!!url}}/wp-json/jwt-auth/v1/token
+\end
+
+Enter your domain where your index.php lives<br>
+<$edit-text tiddler="current_url" field="url" placeholder="mywebsite.com"/>
+
+<$wikify name="url" text=<<url>>>
+
+<$set name=LoginState value={{$:/state/OokTech/Login}}>
+<<loginform>>
+</$set>
+
+
+</$wikify>
+
+{{view/reader}}

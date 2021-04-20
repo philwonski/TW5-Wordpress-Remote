@@ -1,0 +1,9 @@
+created: 20210420155739522
+modified: 20210420161007748
+tags: 
+title: viewbutton
+type: text/vnd.tiddlywiki
+
+<$button class="greenview"><$action-navigate $to="reader"/>View Wordpress Posts</$button>
+
+<div style="display:none">{{GET_posts}}</div>

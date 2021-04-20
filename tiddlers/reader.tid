@@ -1,0 +1,25 @@
+created: 20210418195454193
+modified: 20210420165154046
+tags: 
+title: reader
+type: text/vnd.tiddlywiki
+
+<div class="posttitle"> <$list filter="[[wp_list_posts]getindex[0/title/rendered]] +[decodeuricomponent[]]">{{!!title}}</$list> </div> <div class="thumb"><img src={{{ [[wp_list_posts]getindex[0/jetpack_featured_media_url]] }}}/> </div>
+<div class="clearfix"/>
+<hr>
+
+<div class="posttitle"> <$list filter="[[wp_list_posts]getindex[1/title/rendered]] +[decodeuricomponent[]]">{{!!title}}</$list> </div> <div class="thumb"><img src={{{ [[wp_list_posts]getindex[1/jetpack_featured_media_url]] }}}/> </div>
+<div class="clearfix"/>
+<hr>
+
+<div class="posttitle"> <$list filter="[[wp_list_posts]getindex[2/title/rendered]] +[decodeuricomponent[]]">{{!!title}}</$list> </div> <div class="thumb"><img src={{{ [[wp_list_posts]getindex[2/jetpack_featured_media_url]] }}}/> </div>
+<div class="clearfix"/>
+<hr>
+
+<div class="posttitle"> <$list filter="[[wp_list_posts]getindex[3/title/rendered]] +[decodeuricomponent[]]">{{!!title}}</$list> </div> <div class="thumb"><img src={{{ [[wp_list_posts]getindex[3/jetpack_featured_media_url]] }}}/> </div>
+<div class="clearfix"/>
+<hr>
+
+<div class="posttitle"> <$list filter="[[wp_list_posts]getindex[4/title/rendered]] +[decodeuricomponent[]]">{{!!title}}</$list> </div> <div class="thumb"><img src={{{ [[wp_list_posts]getindex[4/jetpack_featured_media_url]] }}}/> </div>
+<div class="clearfix"/>
+<hr>

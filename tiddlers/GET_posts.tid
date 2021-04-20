@@ -1,0 +1,18 @@
+created: 20210418194556742
+modified: 20210420163948621
+tags: 
+title: GET_posts
+type: text/vnd.tiddlywiki
+
+\define GETmacro()
+<$macrocall $name="getJSONFromUrl" tiddlername="wp_list_posts" url="$(url)$"/>
+\end
+
+\define url()
+https://{{current_url!!url}}/wp-json/wp/v2/posts
+\end
+
+<$wikify name="url" text=<<url>>>
+<<GETmacro>>
+</$wikify>
+
