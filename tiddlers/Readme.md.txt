@@ -15,7 +15,7 @@
    * People who find the Wordpress backend slow or confusing, and want to power up backend tasks using the power of Tiddlywiki (think bulk creation/editing of posts). 
    * People who are looking for a way to add signup and user storage to Tiddlywiki. 
 
-![Screenshot](talk2menice_screenshot.jpg)
+![Screenshot](wp_remote_screenshot.jpg)
 
 # Getting Started
 
