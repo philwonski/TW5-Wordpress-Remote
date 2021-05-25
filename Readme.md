@@ -21,7 +21,7 @@
 
 From this repository you need only the `remote.html` to get started; but there is an important  prerequisite within Wordpress, as you'll need to follow the steps to install the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/) first (it's very straightforward).
 
-Once you're done with that, you can just drop the `remote.html` file from the `output/` directory of this repository into whatever directory houses your Wordpress index.php file. Then simply navigate to [yourdomain]/talk.html and login to Wordpress.
+Once you're done with that, you can just drop the `remote.html` file from the `output/` directory of this repository into whatever directory houses your Wordpress index.php file. Then simply navigate to [yourdomain]/remote.html and login to Wordpress.
 
 Once you log in, a button will pop up under the login form to allow you to "View Posts." 
 
