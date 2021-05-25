@@ -25,11 +25,11 @@ Once you're done with that, you can just drop the `remote.html` file from the `o
 
 Once you log in, a button will pop up under the login form to allow you to "View Posts." 
 
-Note that the reader won't work from your local machine unless you set up CORS support with the WP JWT plugin. Best practice is just to drop the file on your actual domain. 
+Note that the "reader" won't work from your local machine unless you set up CORS support with the WP JWT plugin. Best practice is just to drop the file on your actual domain. 
 
 ## Prerequisites 
 
-1. A site running Wordpress and the ability to upload the talk.html file. 
+1. A site running Wordpress and the ability to upload the remote.html file. 
 2. The WP API plugin installed and configured as per the instructions. 
 
 ## Doing your own thing with it
@@ -49,7 +49,7 @@ This wiki uses a combination of the following plugins:
 # To-Do
 
 1. Clean up the basics for reading data 
-   * Improve "Posts" view
+   * Improve "Posts" view, currently reader.tid
    * Add non-Jetpack image fields
 
 2. Add some write functionality
