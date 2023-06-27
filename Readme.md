@@ -1,5 +1,7 @@
 # TW5-Wordpress-Remote
 
+**A unique "headless Wordpress" tool**
+
 WP-Remote is a tool for communicating with Wordpress's built-in REST API -- without requiring any special plugins on the Wordpress site. Demo [here](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi).
 
 Based on [TiddlyWiki](https://tiddlywiki.com), you can now use the power of TiddlyWiki's *WikiText* syntax to talk to a Wordpress site. 
