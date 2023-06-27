@@ -1,6 +1,6 @@
 # TW5-Wordpress-Remote
 
-WP-Remote is a tool for communicating with the Wordpress's built-in REST API -- without requiring any special plugins on the Wordpress site. Demo [here](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi).
+WP-Remote is a tool for communicating with Wordpress's built-in REST API -- without requiring any special plugins on the Wordpress site. Demo [here](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi).
 
 Based on [TiddlyWiki](https://tiddlywiki.com), you can now use the power of TiddlyWiki's *WikiText* syntax to talk to a Wordpress site. 
 
@@ -96,7 +96,7 @@ If you modify the class file, remember to compile the updated javascript file wi
 
 # Usage
 
-The plugin adds a new widget called `<$wpremote>` that you can use in your wikitext. As of my first commits to the "reboot" version of this plugin in 2023, I have hardcoded a method to get 5 posts from page 1 of any site running the Wordpress like this:
+The plugin adds a new widget called `<$wpremote>` that you can use in your wikitext. As of my first commits to the "reboot" version of this plugin in 2023, I have hardcoded a method to get 5 posts from page 1 of any site running the Wordpress API like this:
 
 ```
 <$wpremote wpaction="getposts" wpsite="mydigitalmark.com">
