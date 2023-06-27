@@ -1,0 +1,10 @@
+{
+	"title": "philwonski/TW5-Wordpress-Remote",
+	"description": "integrating TiddlyWiki and Wordpress via WPAPI",
+	"author": "@philwonski",
+	"version": "0.1.1",
+	"core-version": ">=5.2.4",
+	"list": "test-wpapi",
+	"source": "https://github.com/philwonski/TW5-Wordpress-Remote",
+	"plugin-type": "plugin"
+}

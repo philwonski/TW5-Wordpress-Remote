@@ -1,0 +1,31 @@
+{
+	"tiddlers": [
+		{
+			"file": "classWordpress.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/philwonski/TW5-Wordpress-Remote/classWordpress.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "wpapi.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/philwonski/TW5-Wordpress-Remote/wpapi.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "../LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/philwonski/TW5-Wordpress-Remote/LICENSE"
+			}
+		}
+	]
+}

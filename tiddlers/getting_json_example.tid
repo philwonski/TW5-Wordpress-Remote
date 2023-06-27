@@ -1,9 +1,0 @@
-created: 20210418194448244
-modified: 20210420170336654
-tags: 
-title: getting_json_example
-type: text/vnd.tiddlywiki
-
-```
-<<getJSONFromUrl "wp_4217" "https://xxxx.com/wp-json/wp/v2/posts/4217">>
-```

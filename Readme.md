@@ -1,61 +1,111 @@
-# What is it? 
+# TW5-Wordpress-Remote
 
-1. Technically: A single-page HTML file that can talk to the Wordpress API. 
-2. Effectively: 
-   * A potential replacement for the Wordpress backend for some publishers/tasks.  
-   * A way to use Wordpress as a backend for Tiddlywiki, a frontend SPA with AJAX. 
+WP-Remote is a tool for communicating with the Wordpress's built-in REST API -- without requiring any special plugins on the Wordpress site. Demo [here](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi).
 
-# Who is it for? 
+Based on [TiddlyWiki](https://tiddlywiki.com), you can now use the power of TiddlyWiki's *WikiText* syntax to talk to a Wordpress site. 
 
-1. In Development: 
-   * People who want to make custom Wordpress backend views/actions. 
-   * People who want to integrate Tiddlywiki with a stable backend. 
+```
+<$wpremote wpaction="getposts" wpsite="mydigitalmark.com">
+```
 
-2. In Practice: 
-   * People who find the Wordpress backend slow or confusing, and want to power up backend tasks using the power of Tiddlywiki (think bulk creation/editing of posts). 
-   * People who are looking for a way to add signup and user storage to Tiddlywiki. 
+Handy! 
 
-![Screenshot](wp_remote_screenshot.jpg)
+# Why?
 
-# Getting Started
+Sometimes the Wordpress backend can be cumbersome (or even inaccessible). Come to think of it, sometimes the Wordpress *frontend* of a site can be pretty cumbersome, too. 
 
-From this repository you need only the `remote.html` to get started; but there is an important  prerequisite within Wordpress, as you'll need to follow the steps to install the [JWT Authentication for WP-API](https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api/) first (it's very straightforward).
+This plugin allows you to quickly use and build new interfaces for consuming/modifying Wordpress content, working with Wordpress sites in a "headless" fashion. The plugin uses the power of TiddlyWiki and WikiText to ingest, modify, and post updates to Wordpress websites. 
 
-Once you're done with that, you can just drop the `remote.html` file from the `output/` directory of this repository into whatever directory houses your Wordpress index.php file. Then simply navigate to [yourdomain]/remote.html and login to Wordpress.
+> **That's the why:** TiddlyWiki is crazy fast for building custom user interfaces using its WikiText syntax.
 
-Once you log in, a button will pop up under the login form to allow you to "View Posts." 
+In this way, the plugin is just exposing a bunch of Wordpress methods (get posts, create a post, etc) in WikiText when you call on the widget like this `<$wpremote wpaction="YOUR_ACTION">`. 
 
-Note that the "reader" won't work from your local machine unless you set up CORS support with the WP JWT plugin. Best practice is just to drop the file on your actual domain. 
+# How?
 
-## Prerequisites 
+Short answer: I wrapped the [WPAPI NPM library](https://www.npmjs.com/package/wpapi) in a TiddlyWiki plugin so you can call its cool methods in your WikiText. 
 
-1. A site running Wordpress and the ability to upload the remote.html file. 
-2. The WP API plugin installed and configured as per the instructions. 
+Longer answer:
 
-## Doing your own thing with it
+Developers are like onions. We have layers.
 
-This tool was created in [Tiddlywiki](https://tiddlywiki.com) (TW5). If you know Tiddlywiki, you can clone this repository and interact with the .tid files directly. You can also run it locally on node: from a shell in this directory, run `tiddlywiki --listen port=8089` to run Tiddlywiki locally (on port 8089) and interact with it in the browser. 
+Or we *like* layers. As in layers of abstraction.
 
-This wiki uses a combination of the following plugins:
+So how this all works is:
 
-1. LOGIN - Jed [@Ooktech](https://github.com/OokTech) created a killer extension of Tiddlywiki called Bob, which adds multi-user functionality to Tiddlywiki (among other things); his Login plugin, [TW5-Login](https://github.com/OokTech/TW5-Login), is a precursor/component of Bob. It's used to send a request to Wordpress for a token, then store the token in cookies and localstorage. I made only a slight modification in handling the token. 
+- Some very smart people abstracted website management via a big PHP monolith called Wordpress. (abstraction count: 1)
+- Some of the same very smart people abstracted the Wordpress database into a REST API. (abstraction count: 2)
+- Some other very smart people abstracted the Wordpress REST API into a NodeJS library called WPAPI. (abstraction count: 3)
+- Some other very smart people, especially Jeremy Ruston, abstracted UI development into a syntax called WikiText, which runs in a single-page application called TiddlyWiki. (abstraction count: 4)
+- I abstracted TiddlyWiki plugin development into an organizational framework called HelloJson. (abstraction count: 5)
+- I abstracted the WPAPI library into the HelloJson style, creating the TiddlyWiki plugin you're reading about called TW5-WP-Remote. (abstraction count: 6)
+- YOU now get to abstract all the above with your creative wikitext via `<$wpremote>` calls in your Wiki. (abstraction count: 7)
 
-1. GET WP DATA - Paulin in [this thread](https://groups.google.com/g/tiddlywiki/c/E_X3KUHOvEk/m/ucL23ju5AAAJ) shared his elegant AJAX script to fetch some data with a GET request and create a tiddler out of it. This is modified only slightly so it will fetch json instead of markdown. *NOTE* when TW reads the data from the GET request, it takes the image url from `jetpack_featured_media_url`, which won't be present unless the site is using Wordpress's Jetpack plugin. 
+7 layers of abstraction to empower you (and me) to do stuff like this `<$wpremote wpaction="createposts" tidfilter="[tag[toPublish]]" />`.
 
-2. SEND WP DATA - Jed [@Ooktech](https://github.com/OokTech) strikes again with his straightforward POST request from tiddlywiki in [TW5-SubmitForm](https://github.com/OokTech/TW5-SubmitForm). I have modified it slightly for posting json payloads instead of url params. So far I have only updated "published date" of a post for scheduling, and I haven't built an interface for this yet... ultimately I would like to be able to do everything the API can accommodate, especially inserting things into Gutenberg blocks (it's easy to send text and create a Post, but modifying blocks is another story). 
+🤓
 
-3. MANIPULATE DATA - @joshuafontany opens up a world of possibilities for Tiddlywiki users with his [jsonmangler](https://github.com/joshuafontany/TW5-JsonMangler) plugin, which allows us to handle nested json in Tiddlywiki (TW5 only supports flat json without this plugin, which limits AJAX functionality). 
+# This Repo
 
-# To-Do
+This repo uses a CI pipeline borrowed from my opinioned TiddlyWiki plugin development framework called [HelloJson](https://github.com/philwonski/twplugins-hello-json).
 
-1. Clean up the basics for reading data 
-   * Improve "Posts" view, currently reader.tid
-   * Add non-Jetpack image fields
+HelloJson is mostly about the file structure:
 
-2. Add some write functionality
-   * Make published date functionality visible on "Posts" view
-   * Add other basic write capabilities
-   * Add routes (fields) to Wordpress Posts for writing data 
-   * Create ability to work directly with content in Gutenberg blocks 
+- `wp.js` - the main plugin file that's (almost) straight from the TiddlyWiki plugin boilerplate, with as little logic as possible. It calls on the class file.
+  - `files/classWordpress.js` - the class file is where we put all the "business logic" for performing operations via our own custom methods like `getPhilsTop10Posts()`. According the HelloJson style conventions, we try to keep the class file relatively clean by calling helper files when necessary. We also compile the file from a coffeescript parent file, `classWordpress.coffee`.
+    - `files/wpapi.js` - is the first helper file for this repo. It's just a minified version of the WPAPI library.
 
-3. Demonstrate "headless Wordpress" as a backend for a frontend Tiddlywiki app.  
+# Setup
+
+*Option 1*
+
+You can check out the [demo](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi) and, via the Control Panel, [drag and drop this plugin](https://tiddlywiki.com/#Manually%20installing%20a%20plugin) right into your wiki. 
+
+Now you've got the plugin in your wiki and can mess with the wikitext, or even overwrite the plugin files with your own customizations (requires restart + refresh of your Wiki to see the changes).
+
+*Option 2*
+
+I set up my dev environment exactly like the instructions here: 
+
+[https://tiddlywiki.com/dev/#Developing%20plugins%20using%20Node.js%20and%20GitHub](https://tiddlywiki.com/dev/#Developing%20plugins%20using%20Node.js%20and%20GitHub)
+
+It may seem like a bunch of steps, but the build process is very logical once you get the hang of it. It can be boiled down to this:
+
+1. Make a folder on your computer called TWdev (or whatever you want). This is where you will keep all your plugins that you work on.
+
+2. Inside the new directory, install a local copy of TW5 with `git clone https://github.com/Jermolene/TiddlyWiki5.git TW5`.
+
+3. Now you can see the TW5 directory has two important folders: `/editions` and `/plugins`. All we are doing is:
+    1. Adding our own plugin code under plugins.
+    2. Picking an edition, like `TW5/editions/empty`, and adding a quick reference to our plugin in the `tiddlywiki.info` file.
+    3. Running a single command *in the TW5 folder* to build that particular edition with our plugin included, like `node ./tiddlywiki.js editions/empty --build index`... this will create a static html version of the wiki you can view and share. Find the static file in the the `output` folder under the edition you just built.
+
+So the top of my file `TWdev/TW5/editions/empty/tiddlywiki.info` now looks like this:
+
+```
+{
+	"description": "Empty edition",
+	"plugins": [
+		"philwonski/TW5-Wordpress-Remote"
+	],
+
+```
+
+And I can generate a static html version of the wiki, with my plugin included, by running this command in the TW5 folder: `node ./tiddlywiki.js editions/empty --build index` and then opening the file `...TWdev/TW5/editions/empty/output/index.html#test-wpapi` in my browser.
+
+If you modify the class file, remember to compile the updated javascript file with `coffee -c classWordpress.coffee` from the /files folder.
+
+# Usage
+
+The plugin adds a new widget called `<$wpremote>` that you can use in your wikitext. As of my first commits to the "reboot" version of this plugin in 2023, I have hardcoded a method to get 5 posts from page 1 of any site running the Wordpress like this:
+
+```
+<$wpremote wpaction="getposts" wpsite="mydigitalmark.com">
+```
+
+I have found this is actually a great way to browse different sites and see a consolidated view of their latest posts, almost like an RSS feed. 
+
+# Examples
+
+Look out for more methods I'll be adding here soon, including the ability to accept Wordpress credentials and perform actions like creating posts, updating posts, and deleting posts. Wordpress and its REST API now have this functionality built-in: all you have to do is pull up an admin in the Wordpress backend and enable an "Application Password" for them. 
+
+
