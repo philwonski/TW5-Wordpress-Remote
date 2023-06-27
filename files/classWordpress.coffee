@@ -1,4 +1,4 @@
-WPAPI = require('./wpapi.js')
+WPAPI = require('./helper-wpapi.js')
 
 class Wordpress
     constructor: (@w = {}) ->

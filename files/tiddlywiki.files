@@ -11,10 +11,10 @@
 			"suffix": ""
 		},
 		{
-			"file": "wpapi.js",
+			"file": "helper-wpapi.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/philwonski/TW5-Wordpress-Remote/wpapi.js",
+				"title": "$:/plugins/philwonski/TW5-Wordpress-Remote/helper-wpapi.js",
 				"module-type": "library"
 			},
 			"prefix": "",

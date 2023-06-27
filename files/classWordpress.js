@@ -2,7 +2,7 @@
 (function() {
   var WPAPI, Wordpress;
 
-  WPAPI = require('./wpapi.js');
+  WPAPI = require('./helper-wpapi.js');
 
   Wordpress = class Wordpress {
     constructor(w = {}) {

@@ -52,7 +52,7 @@ HelloJson is mostly about the file structure:
 
 - `wp.js` - the main plugin file that's (almost) straight from the TiddlyWiki plugin boilerplate, with as little logic as possible. It calls on the class file.
   - `files/classWordpress.js` - the class file is where we put all the "business logic" for performing operations via our own custom methods like `getPhilsTop10Posts()`. According the HelloJson style conventions, we try to keep the class file relatively clean by calling helper files when necessary. We also compile the file from a coffeescript parent file, `classWordpress.coffee`.
-    - `files/wpapi.js` - is the first helper file for this repo. It's just a minified version of the WPAPI library.
+    - `files/helper-wpapi.js` - is the first helper file for this repo. It's just a minified version of the WPAPI library.
 
 # Setup
 
