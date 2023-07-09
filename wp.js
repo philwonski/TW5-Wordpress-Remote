@@ -58,6 +58,14 @@ wpremote widget
         this.wpaction = this.getAttribute("wpaction");
         this.wpsite = this.getAttribute("wpsite");
         var instructions = `testing ${this.COMMAND} on ${this.wpsite}...`;
+      } 
+      
+        else if (this.COMMAND == "post-summary") {
+        // command="hangover" params: day1, day2
+        this.wpaction = this.getAttribute("wpaction");
+        this.post = this.getAttribute("post");
+        this.aicreds = this.getAttribute("creds");
+        var instructions = `testing ${this.COMMAND} ...`;
       }
       
       return instructions;
@@ -97,7 +105,24 @@ wpremote widget
 
     return console.log(msg);
   
-  } else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {
+  }     else if (COMMAND == "post-summary") {
+    // ******************************************************************************** //
+    //  EXAMPLE- OPENAI: summarize a post you pulled from WP
+    // ******************************************************************************** //
+
+     
+      var post = this.post;
+      var aicreds = this.aicreds;
+
+      var wp = new Wordpress();
+      await wp.getAIsummary(aicreds, post);
+      var msg = "sent post, check for summary in aisummary field of the post";
+
+      return console.log(msg);
+}
+  
+  
+  else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {
     var reply = "Hello, World! The plugin is installed.";
     return reply;
   } 

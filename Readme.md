@@ -39,7 +39,7 @@ So how this all works is:
 - Some other very smart people abstracted the Wordpress REST API into a NodeJS library called WPAPI. (abstraction count: 3)
 - Some other very smart people, especially Jeremy Ruston, abstracted UI development into a syntax called WikiText, which runs in a single-page application called TiddlyWiki. (abstraction count: 4)
 - I abstracted TiddlyWiki plugin development into an organizational framework called HelloJson. (abstraction count: 5)
-- I abstracted the WPAPI library into the HelloJson style, creating the TiddlyWiki plugin you're reading about called TW5-WP-Remote. (abstraction count: 6)
+- I abstracted the WPAPI library into the HelloJson style, creating the TiddlyWiki plugin you're reading about called TW5-Wordpress-Remote. (abstraction count: 6)
 - YOU now get to abstract all the above with your creative wikitext via `<$wpremote>` calls in your Wiki. (abstraction count: 7)
 
 7 layers of abstraction to empower you (and me) to do stuff like this `<$wpremote wpaction="createposts" tidfilter="[tag[toPublish]]" />`.
@@ -53,14 +53,14 @@ This repo uses a CI pipeline borrowed from my opinioned TiddlyWiki plugin develo
 HelloJson is mostly about the file structure:
 
 - `wp.js` - the main plugin file that's (almost) straight from the TiddlyWiki plugin boilerplate, with as little logic as possible. It calls on the class file.
-  - `files/classWordpress.js` - the class file is where we put all the "business logic" for performing operations via our own custom methods like `getPhilsTop10Posts()`. According the HelloJson style conventions, we try to keep the class file relatively clean by calling helper files when necessary. We also compile the file from a coffeescript parent file, `classWordpress.coffee`.
+  - `files/classWordpress.js` - the class file is where we put all the "business logic" for performing operations via our own custom methods like `getPhilsTop10Posts()`. In accordance with HelloJson style conventions, we try to keep the class file relatively clean by calling helper files when necessary. We also compile the file from a coffeescript parent file, `classWordpress.coffee`.
     - `files/helper-wpapi.js` - is the first helper file for this repo. It's just a minified version of the WPAPI library.
 
 # Setup
 
 *Option 1*
 
-You can check out the [demo](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi) and, via the Control Panel, [drag and drop this plugin](https://tiddlywiki.com/#Manually%20installing%20a%20plugin) right into your wiki. 
+You can check out the [demo](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi) and, via the Control Panel, [drag and drop the plugin](https://tiddlywiki.com/#Manually%20installing%20a%20plugin) right into your wiki. 
 
 Now you've got the plugin in your wiki and can mess with the wikitext, or even overwrite the plugin files with your own customizations (requires restart + refresh of your Wiki to see the changes).
 
@@ -98,7 +98,7 @@ If you modify the class file, remember to compile the updated javascript file wi
 
 # Usage
 
-The plugin adds a new widget called `<$wpremote>` that you can use in your wikitext. As of my first commits to the "reboot" version of this plugin in 2023, I have hardcoded a method to get 5 posts from page 1 of any site running the Wordpress API like this:
+The plugin adds a new widget called `<$wpremote>` that you can use in your wikitext. As a basic example, I have hardcoded a method to get 5 posts from page 1 of any site running the Wordpress API like this:
 
 ```
 <$wpremote wpaction="getposts" wpsite="mydigitalmark.com">
@@ -110,4 +110,46 @@ I have found this is actually a great way to browse different sites and see a co
 
 Look out for more methods I'll be adding here soon, including the ability to accept Wordpress credentials and perform actions like creating posts, updating posts, and deleting posts. Wordpress and its REST API now have this functionality built-in: all you have to do is pull up an admin in the Wordpress backend and enable an "Application Password" for them. 
 
+## 1. getposts
 
+*Purpose*
+
+Pre-built method to get 5 posts from page 1 of any site running the Wordpress API.
+
+*Usage*
+
+You can put most any wordpress site in the `wpsite` param, but the site must have the Wordpress REST API enabled.
+
+`<$wpremote wpaction="getposts" wpsite="mydigitalmark.com"/>`
+
+*Demo*
+
+[https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi](https://philwonski.github.io/TW5-Wordpress-Remote/#test-wpapi)
+
+*More Info*
+
+This basic examples shows how we can greatly reduce the code required to interact with a Wordpress site and database. It gives you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or, on the other hand, you could also use it to build backends for *TiddlyWiki* sites using headless Wordpress.
+
+## 2. ai-summary
+
+*Purpose*
+
+This is a method that uses the OpenAI API to summarize a post. 
+
+It's a great way to get a quick overview of a post without having to read the whole thing; and it demonstrates how we can do interesting mashups with TiddlyWiki and its Wikitext as the frontend JS framework. 
+
+**CAREFUL, THIS METHOD USES YOUR OPENAI API KEY AND IT CAN GET PRICEY QUICK.**
+
+*Usage*
+
+```
+<$wpremote wpaction="post-summary" post={{!!title}} creds="creds1"/>
+
+```
+
+- Where the `!!title` referenced is the post imported via the `getposts` action (example 1).
+- And `creds1` is a reference to a tiddler that contains your OpenAI API key in its `apikey` field.
+
+*Demo*
+
+[https://philwonski.github.io/TW5-Wordpress-Remote/#test-ai-summary](https://philwonski.github.io/TW5-Wordpress-Remote/#test-ai-summary)

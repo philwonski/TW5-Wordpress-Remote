@@ -33,6 +33,7 @@ Below the line, I display the results using the list widget. I filter for the ta
 
 <div style="width:25%; float:left; margin-right: 1.5%">
 <img width="165px" src={{{ [{!!text}jsonget[yoast_head_json],[og_image],[0],[url]] }}} >
+<img width="165px" src={{{ [{!!text}jsonget[jetpack_featured_media_url]] }}} >
 </div>
 
 <div style="width:70%; float:left;">

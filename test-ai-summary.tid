@@ -1,0 +1,73 @@
+title: test-ai-summary
+created: 20230624164533000
+modified: 20230624164533333
+tags: example
+type: text/vnd.tiddlywiki
+
+!! Example
+
+Get a Wordpress article summarized using OpenAI's GPT-4 API (or any other model).
+
+```
+<$button>Test Button (click me):
+<$wpremote wpaction="post-summary" post={{!!title}} creds="creds1"/>
+</$button>
+```
+
+The wpremote widget will grab the text of the post and send it to the API. The API will return a summary of the post. The summary will be saved in the `aisummary` field of the post tiddler.
+
+First retrieve a bunch of posts from whatever site you want. This button uses the `getposts` action of the wpremote widget; the difference with the regular get posts example is now the display template of the results of get posts will include:
+
+* a button that will send the post to the API
+* a field that will display the summary of the post
+
+
+|Site to read | <$edit-text tiddler="$:/state/temp-openai-site" field="url" placeholder="time.com" size="35"/> |
+|OpenAI Key | <$edit-text tiddler="creds1" field="apikey" placeholder="key" size="35" /> |
+
+<!--🍔 The test button will create new Tiddlers based on the post id in Wordpress 🍔-->
+<$button>Get Posts
+<$wpremote wpaction="getposts" wpsite={{$:/state/temp-openai-site!!url}}/>
+</$button>
+
+<hr>
+
+<!--🍟 Show the results by looking for tiddlers tagged "wpPost" 🍟-->
+
+<$list filter="[tag[wpPost]]">
+<div style="width:100%; padding: 2.5%; margin: 1.5%; border: 1px solid grey;">
+
+<div style="width:25%; float:left; margin-right: 1.5%">
+<img width="165px" src={{{ [{!!text}jsonget[yoast_head_json],[og_image],[0],[url]] }}} >
+<img width="165px" src={{{ [{!!text}jsonget[jetpack_featured_media_url]] }}} >
+</div>
+
+<div style="width:70%; float:left;">
+
+
+title: <a target="_blank" href={{!!wplink}} > <$text text={{{ [{!!text}jsonget[title],[rendered]] }}} /> </a><br>
+id: <$link to={{!!title}} > <$text text={{{ [{!!text}jsonget[id]] }}} /> </$link> 
+<br>
+....
+<br>
+<$text text={{{ [{!!text}jsonget[excerpt],[rendered]] }}} />
+<br>
+''Summerize the post with GPT-4''
+
+<$button>Test Button (click me):
+<$wpremote wpaction="post-summary" post={{!!title}} creds="creds1"/>
+</$button>
+
+<$list filter="[all[current]has[aisummary]]">
+<i>Summary from Open AI</i><br>
+{{!!aisummary}}
+</$list>
+
+</div>
+
+<div style="float:none; clear:both;"></div>
+
+</div>
+</$list>
+
+
